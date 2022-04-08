@@ -12,23 +12,48 @@ import java.lang.Number;
  */
 public class FilesInOut {
 
-    public static void main(String[] args) {
-        // Replace this with statements to set the file name (input) and file name (output).
-        // Initially it will be easier to hardcode suitable file names.
-
-        // Set up a new Scanner to read the input file.
-        // Processing line by line would be sensible here.
-        // Initially, echo the text to System.out to check you are reading correctly.
-        // Then add code to modify the text to the output format.
-
-        // Set up a new PrintWriter to write the output file.
-        // Add suitable code into the above processing (because you need to do this line by line also.
-        // That is, read a line, write a line, loop.
-
-        // Finally, add code to read the filenames as arguments from the command line.
-
-        System.out.println("You need to add your own code to do anything");
-
-    } // main
-
-} // FilesInOut
+    public static String capitalise(String name)
+    {
+        name=name.toLowerCase();
+        char[] name_array=name.trim().toCharArray();
+        name_array[0]=Character.toUpperCase(name_array[0]);
+        for(int i=0;i< name_array.length;i++)
+        {
+            if(name_array[i]==' ' && (i+1)< name_array.length)
+            {
+                name_array[i+1]=Character.toUpperCase(name_array[i+1]);
+            }
+        }
+        return new String(name_array);
+    }
+    public static String upper_case(String ip)
+    {
+        String op=ip.toUpperCase();
+        return ip;
+    }
+    public static void main(String[] args) throws FileNotFoundException{
+        Scanner console= new Scanner(System.in);
+        System.out.println("Enter name of input file: ");
+        String input_file=console.next();
+        System.out.println("Enter name of output file: ");
+        String output_file=console.next();
+        System.out.println("The input file is: "+input_file);
+        System.out.println("The output file is: "+output_file);
+        File inputFile=new File(input_file);
+        Scanner in= new Scanner(inputFile);
+        PrintWriter out= new PrintWriter(output_file);
+        System.out.println("Capitalising name");
+        while(in.hasNext())
+        {
+            String output=capitalise(in.nextLine());
+            System.out.println(output);
+        }
+        System.out.println("Converting name to Upper Case");
+        while(in.hasNext())
+        {
+            upper_case(in.next());
+        }
+        in.close();
+        out.close();
+    }
+}
